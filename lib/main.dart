@@ -3,6 +3,7 @@ import 'package:saarthi/pages/featuresPages/documents.dart';
 import 'package:saarthi/pages/featuresPages/login.dart';
 import 'package:saarthi/pages/featuresPages/register.dart';
 import 'package:saarthi/pages/navPages/mainPage.dart';
+import 'package:saarthi/pages/navPages/translation.dart';
 import 'package:saarthi/pages/welcome.dart';
 
 void main() => runApp(const MyApp());
@@ -19,12 +20,13 @@ class MyApp extends StatelessWidget {
         // useMaterial3: true,
         primarySwatch: Colors.orange,
       ),
-      home: MainPage(),
+      home: Translate(),
       routes: {
         'register': (context) => MyRegister(),
         'login': (context) => MyLogin(),
         'mainPage': (context) => MainPage(),
         'document': (context) => documentPage(),
+        'translate' : (context) => Translate(),
       },
     );
   }
