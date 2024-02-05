@@ -4,10 +4,14 @@ import 'package:saarthi/misc/colors.dart';
 class ResponsiveButton extends StatelessWidget {
   bool isResponsive;
   double? width;
+  double height;
   final VoidCallback onPress;
 
   ResponsiveButton(
-      {this.isResponsive = false, this.width, required this.onPress});
+      {this.isResponsive = false,
+      this.width,
+      this.height = 60,
+      required this.onPress});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +19,7 @@ class ResponsiveButton extends StatelessWidget {
       onTap: onPress,
       child: Container(
         width: width,
-        height: 60,
+        height: height,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(7),
             color: AppColor.mainButtoncolor),

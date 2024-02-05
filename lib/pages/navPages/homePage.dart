@@ -17,7 +17,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
-  List<String> features = ["Upload", "Track", "Translate", "Help"];
+  var features = {
+    "upload": "document",
+    "Track": "track",
+    "Translate": "translate",
+    "Help": "application",
+  };
+
   List<IconData> _icons = [
     Icons.upload,
     Icons.analytics,
@@ -50,6 +56,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 fontStyle: FontStyle.italic,
               ),
             ),
+
           ),
           backgroundColor: hexToColor("#FFA07A"),
           actions: [IconButton(onPressed: () {}, icon: Icon(Icons.menu,size:40,))],
@@ -100,9 +107,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       return FeatureContainer(
                         icon: _icons[index],
                         color: darkOrange,
-                        text : features[index],
+                        text : features.keys.elementAt(index),
                         onPress: () {
-                          Navigator.pushNamed(context, 'document');
+                          Navigator.pushNamed(context, features.values.elementAt(index));
                         },
                       );
                     },
