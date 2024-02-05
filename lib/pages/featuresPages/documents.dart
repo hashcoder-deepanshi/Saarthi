@@ -60,21 +60,41 @@ class documentPage extends StatelessWidget {
                 mainAxisSpacing: 30,
                 children: [
                   itemDashboard(
-                      'PAN Card', Icons.paypal_rounded, Colors.pinkAccent),
+                      'PAN Card', Icons.paypal_rounded, Colors.pinkAccent, () {
+                    Navigator.pushNamed(context, 'doc_det');
+                  }),
                   itemDashboard(
-                      'Aadhar Card', Icons.paypal_rounded, Colors.pinkAccent),
+                      'Aadhar Card', Icons.paypal_rounded, Colors.pinkAccent,
+                      () {
+                    Navigator.pushNamed(context, 'doc_det');
+                  }),
                   itemDashboard(
-                      'Voter ID Card', Icons.paypal_rounded, Colors.pinkAccent),
+                      'Voter ID Card', Icons.paypal_rounded, Colors.pinkAccent,
+                      () {
+                    Navigator.pushNamed(context, 'doc_det');
+                  }),
                   itemDashboard(
-                      'Credit Card', Icons.paypal_rounded, Colors.pinkAccent),
+                      'Credit Card', Icons.paypal_rounded, Colors.pinkAccent,
+                      () {
+                    Navigator.pushNamed(context, 'doc_det');
+                  }),
                   itemDashboard(
-                      'Passbook Card', Icons.paypal_rounded, Colors.pinkAccent),
+                      'Passbook Card', Icons.paypal_rounded, Colors.pinkAccent,
+                      () {
+                    Navigator.pushNamed(context, 'doc_det');
+                  }),
                   itemDashboard(
-                      'PAN Card', Icons.paypal_rounded, Colors.pinkAccent),
+                      'PAN Card', Icons.paypal_rounded, Colors.pinkAccent, () {
+                    Navigator.pushNamed(context, 'doc_det');
+                  }),
                   itemDashboard(
-                      'PAN Card', Icons.paypal_rounded, Colors.pinkAccent),
+                      'PAN Card', Icons.paypal_rounded, Colors.pinkAccent, () {
+                    Navigator.pushNamed(context, 'doc_det');
+                  }),
                   itemDashboard(
-                      'PAN Card', Icons.paypal_rounded, Colors.pinkAccent),
+                      'PAN Card', Icons.paypal_rounded, Colors.pinkAccent, () {
+                    Navigator.pushNamed(context, 'doc_det');
+                  }),
                 ],
               ),
             ),
@@ -85,29 +105,33 @@ class documentPage extends StatelessWidget {
   }
 }
 
-itemDashboard(String title, IconData _icon, Color bg) => Container(
-      decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
-          boxShadow: [
-            BoxShadow(
-                offset: const Offset(0, 5),
-                color: Colors.orange.withOpacity(0.2),
-                spreadRadius: 2,
-                blurRadius: 5)
-          ]),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            decoration: BoxDecoration(color: bg, shape: BoxShape.circle),
-            child: Icon(_icon, color: Colors.white),
-          ),
-          const SizedBox(height: 8),
-          AppText(
-            text: title,
-            color: Colors.black,
-          )
-        ],
+itemDashboard(String title, IconData _icon, Color bg, VoidCallback onPress) =>
+    InkWell(
+      onTap: onPress,
+      child: Container(
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10),
+            boxShadow: [
+              BoxShadow(
+                  offset: const Offset(0, 5),
+                  color: Colors.orange.withOpacity(0.2),
+                  spreadRadius: 2,
+                  blurRadius: 5)
+            ]),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              decoration: BoxDecoration(color: bg, shape: BoxShape.circle),
+              child: Icon(_icon, color: Colors.white),
+            ),
+            const SizedBox(height: 8),
+            AppText(
+              text: title,
+              color: Colors.black,
+            )
+          ],
+        ),
       ),
     );

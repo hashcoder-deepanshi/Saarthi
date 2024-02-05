@@ -9,12 +9,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
-  List features = [
-    "upload",
-    "Track",
-    "Translate",
-    "Help",
-  ];
+  var features = {
+    "upload": "document",
+    "Track": "track",
+    "Translate": "translate",
+    "Help": "application",
+  };
 
   List<IconData> _icons = [
 // The underscore declares a variable as private in dart.
@@ -82,9 +82,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 tabs: [
                   Tab(text: "Schemes"),
                   Tab(text: "Notification"),
-                  Tab(
-                    text: "Headlines",
-                  )
                 ]),
           ),
         ),
@@ -111,7 +108,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               },
             ),
             Text("Hello"),
-            Text("There")
           ]),
         ),
         SizedBox(
@@ -160,14 +156,15 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           icon: _icons[index],
                           color: _color[index],
                           onPress: () {
-                            Navigator.pushNamed(context, 'document');
+                            Navigator.pushNamed(
+                                context, features.values.elementAt(index));
                           }),
                       SizedBox(
                         height: 4,
                       ),
                       Container(
                         child: AppText(
-                          text: features[index], /* color*/
+                          text: features.keys.elementAt(index), /* color*/
                         ),
                       ),
                     ],
