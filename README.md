@@ -1,6 +1,6 @@
 # Saarthi
 
-A new Flutter project created with FlutLab - https://flutlab.io
+This is an app to help old age group with their government officials.
 
 ## Getting Started
 

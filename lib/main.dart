@@ -9,6 +9,7 @@ import 'package:saarthi/pages/featuresPages/pension_status.dart';
 import 'package:saarthi/pages/featuresPages/track.dart';
 import 'package:saarthi/pages/featuresPages/track_otp.dart';
 import 'package:saarthi/pages/navPages/mainPage.dart';
+import 'package:saarthi/pages/navPages/translation.dart';
 import 'package:saarthi/pages/welcome.dart';
 
 void main() => runApp(const MyApp());
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: _title,
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         // useMaterial3: true,
         primarySwatch: Colors.orange,
@@ -37,6 +39,7 @@ class MyApp extends StatelessWidget {
         'application': (context) => ApplicationPage(),
         'pension_status': (context) => PensionStatus(),
         'application_det': (context) => Application_det(),
+        'translate' : (context) => Translate(),
       },
     );
   }
