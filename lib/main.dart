@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         // useMaterial3: true,
         primarySwatch: Colors.orange,
       ),
-      home: Translate(),
+      home: MainPage(),
       routes: {
         'register': (context) => MyRegister(),
         'login': (context) => MyLogin(),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:saarthi/misc/colors.dart';
+import 'package:saarthi/pages/featuresPages/calossal.dart';
 import 'package:saarthi/widget/app_large_text.dart';
 import 'package:saarthi/widget/app_text.dart';
 
@@ -89,31 +90,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           ),
         ),
         Container(
-          padding: const EdgeInsets.only(left: 20),
-          height: 300,
-          width: double.maxFinite,
-          child: TabBarView(controller: _tabController, children: [
-            ListView.builder(
-              itemCount: 3,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (BuildContext context, int index) {
-                return Container(
-                  margin: const EdgeInsets.only(right: 15, top: 10),
-                  width: 200,
-                  height: 100,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.white,
-                      image: DecorationImage(
-                          image: AssetImage('assets/IMG1.JPG'),
-                          fit: BoxFit.cover)),
-                );
-              },
-            ),
-            Text("Hello"),
-            Text("There")
-          ]),
-        ),
+  padding: const EdgeInsets.only(left: 20),
+  height: 300,
+  width: double.maxFinite,
+  child: MyCarouselSlider(),
+),
         SizedBox(
           height: 10,
         ),
@@ -163,7 +144,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                             Navigator.pushNamed(context, 'document');
                           }),
                       SizedBox(
-                        height: 4,
+                        height: MediaQuery.of(context).size.height,
                       ),
                       Container(
                         child: AppText(
