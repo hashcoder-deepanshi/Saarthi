@@ -2,6 +2,14 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
+Color hexToColor(String hexCode) {
+  // Remove the leading '#' and parse the hex code as an integer
+  final int colorValue = int.parse(hexCode.substring(1, 7), radix: 16);
+  
+  // Add the alpha value (255 for fully opaque)
+  return Color(colorValue | 0xFF000000);
+}
+
 class MyCarouselSlider extends StatefulWidget {
   const MyCarouselSlider({super.key});
 
@@ -68,7 +76,7 @@ class _MyCarouselSliderState extends State<MyCarouselSlider> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         color:
-                            currentIndex == entry.key ? Colors.red : Colors.black
+                            currentIndex == entry.key ? hexToColor("#2196F3") : Colors.black
                             ,
                       ),
                     ),

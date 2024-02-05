@@ -4,159 +4,128 @@ import 'package:saarthi/pages/featuresPages/calossal.dart';
 import 'package:saarthi/widget/app_large_text.dart';
 import 'package:saarthi/widget/app_text.dart';
 
+Color hexToColor(String hexCode) {
+  final int colorValue = int.parse(hexCode.substring(1, 7), radix: 16);
+  return Color(colorValue | 0xFF000000);
+}
+
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  const HomePage({Key? key}) : super(key: key);
+
+  @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
-  List features = [
-    "upload",
-    "Track",
-    "Translate",
-    "Help",
-  ];
-
+  List<String> features = ["upload", "Track", "Translate", "Help"];
   List<IconData> _icons = [
-// The underscore declares a variable as private in dart.
     Icons.upload,
     Icons.analytics,
     Icons.transcribe,
     Icons.help,
   ];
-
   List<Color> _color = [
-// The underscore declares a variable as private in dart.
-    Colors.lightGreen,
-    Colors.pink,
-    Colors.lightBlue,
-    Colors.yellowAccent,
+    hexToColor("#FFA07A"),
+    hexToColor("#FFA07A"),
+    hexToColor("#FFA07A"),
+    hexToColor("#FFA07A"),
   ];
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
     TabController _tabController = TabController(length: 3, vsync: this);
-    return Scaffold(
-      body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Container(
-          padding: const EdgeInsets.only(top: 70, left: 20, right: 20),
-          child: Row(children: [
-            Container(
-              width: 50,
-              height: 50,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.grey.withOpacity(0.5),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          leading: Container(
+            width: 200.0,
+            height: 200.0,
+            padding :EdgeInsets.only(left: 10),
+            child: ClipOval(
+      child: Image.asset(
+        'assets/logo/logo_1.png',
+        fit: BoxFit.cover,
+        width: 200.0, // Adjust the width of the circular image
+        height: 200.0, // Adjust the height of the circular image
+      ),
+    ),
+          ),
+          title: Center(
+            child: Text(
+              "Saarthi",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
               ),
             ),
-            Expanded(child: Container()),
-            Icon(
-              Icons.menu,
-              size: 38,
-              color: Colors.black54,
-            ),
-          ]),
+          ),
+          backgroundColor: hexToColor("#FFA07A"),
+          actions: [IconButton(onPressed: () {}, icon: Icon(Icons.menu))],
         ),
-        SizedBox(
-          height: 25,
-        ),
-        Container(
-          margin: const EdgeInsets.only(left: 20),
-          child: AppLarge(text: 'Discover'),
-        ),
-        SizedBox(
-          height: 18,
-        ),
-        //tabbar menu
-        Container(
-          child: Align(
-            alignment: Alignment.centerLeft,
-            child: TabBar(
-                labelPadding: const EdgeInsets.only(left: 20, right: 20),
-                controller: _tabController,
-                labelColor: Colors.black,
-                unselectedLabelColor: Colors.grey,
-                //isScrollable: true,
-                indicatorSize: TabBarIndicatorSize.label,
-                indicator: CircleTabIndicator(
-                    color: AppColor.mainButtoncolor, radius: 4),
-                tabs: [
-                  Tab(text: "Schemes"),
-                  Tab(text: "Notification"),
-                  Tab(
-                    text: "Headlines",
-                  )
-                ]),
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 25,
+              ),
+              Container(
+                margin: const EdgeInsets.only(left: 20),
+                child: AppLarge(text: 'Discover'),
+              ),
+              SizedBox(
+                height: 18,
+              ),
+              MyCarouselSlider(),
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                margin: const EdgeInsets.only(left: 20, right: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    AppLarge(
+                      text: 'Explore More',
+                      size: 22,
+                    ),
+                    AppText(
+                      text: 'See All',
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                height: height * 0.3,
+                width: double.maxFinite,
+                child: Expanded(
+                  child: GridView.builder(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10,
+                      childAspectRatio: 2,
+                    ),
+                    itemCount: features.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return FeatureContainer(
+                        icon: _icons[index],
+                        color: _color[index],
+                        onPress: () {
+                          Navigator.pushNamed(context, 'document');
+                        },
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
-        Container(
-  padding: const EdgeInsets.only(left: 20),
-  height: 300,
-  width: double.maxFinite,
-  child: MyCarouselSlider(),
-),
-        SizedBox(
-          height: 10,
-        ),
-        Container(
-            margin: const EdgeInsets.only(left: 20, right: 20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                AppLarge(
-                  text: 'Explore More',
-                  size: 22,
-                ),
-                AppText(
-                  text: 'See All', /*Color*/
-                )
-              ],
-            )),
-        SizedBox(
-          height: 20,
-        ),
-        Container(
-            height: 120,
-            width: double.maxFinite,
-            margin: const EdgeInsets.only(left: 20),
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: features.length,
-              itemBuilder: (_, index) {
-                return Container(
-                  margin: const EdgeInsets.only(right: 10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      // ListTile(
-                      //   leading: Container(
-                      //       width: 40,
-                      //       height: 40,
-                      //       decoration: BoxDecoration(
-                      //           borderRadius: BorderRadius.circular(100),
-                      //           color: Colors.lightBlue.withOpacity(0.1)),
-                      //       child: Icon(Icons.upload)),
-                      // ),
-                      FeatureContainer(
-                          icon: _icons[index],
-                          color: _color[index],
-                          onPress: () {
-                            Navigator.pushNamed(context, 'document');
-                          }),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height,
-                      ),
-                      Container(
-                        child: AppText(
-                          text: features[index], /* color*/
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              },
-            ))
-      ]),
+      ),
     );
   }
 }
@@ -166,11 +135,12 @@ class FeatureContainer extends StatelessWidget {
   final Color color;
   final VoidCallback onPress;
 
-  const FeatureContainer(
-      {super.key,
-      required this.icon,
-      required this.color,
-      required this.onPress});
+  const FeatureContainer({
+    Key? key,
+    required this.icon,
+    required this.color,
+    required this.onPress,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -178,18 +148,20 @@ class FeatureContainer extends StatelessWidget {
       onTap: onPress,
       child: Container(
         margin: const EdgeInsets.only(
-          right: 10,
+          right: 5,
+          left: 5,
         ),
-        width: 80,
-        height: 80,
+        // width: 10,
+        // height: 10,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(100),
+        
+          borderRadius: BorderRadius.circular(50),
           color: color.withOpacity(0.5),
         ),
         child: Icon(
           icon,
           color: color,
-          size: 30,
+          size: 50,
         ),
       ),
     );
@@ -217,8 +189,9 @@ class _CirclePainter extends BoxPainter {
     _paint.color = color;
     _paint.isAntiAlias = true;
     final Offset circleOffset = Offset(
-        configuration.size!.width / 2 - radius / 2,
-        configuration.size!.height - radius);
+      configuration.size!.width / 2 - radius / 2,
+      configuration.size!.height - radius,
+    );
 
     canvas.drawCircle(offset + circleOffset, radius, _paint);
   }
