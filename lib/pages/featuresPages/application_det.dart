@@ -81,7 +81,12 @@ class _Application_detState extends State<Application_det> {
                               color: Colors.black54,
                             )
                           ]),
-                        )
+                        ),
+                        // Stepper(
+                        //   type: StepperType.horizontal,
+                        //   steps: [],
+                        //   currentStep: 0,
+                        // )
                       ],
                     ),
                     SizedBox(
@@ -113,7 +118,7 @@ class _Application_detState extends State<Application_det> {
                           ),
                         ],
                       ),
-                      SizedBox(width: MediaQuery.of(context).size.width * 0.4),
+                      SizedBox(width: MediaQuery.of(context).size.width * 0.25),
                       Text("Feb 06,2024",
                           style: TextStyle(
                               fontSize: 13,

@@ -15,7 +15,9 @@ class _PensionStatusState extends State<PensionStatus> {
     return Scaffold(
         appBar: AppBar(
           leading: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, 'mainPage');
+            },
             icon: const Icon(Icons.arrow_back),
           ),
           title: Text('Pension status'),
