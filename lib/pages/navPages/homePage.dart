@@ -17,64 +17,50 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
-  List<String> features = ["upload", "Track", "Translate", "Help"];
+  List<String> features = ["Upload", "Track", "Translate", "Help"];
   List<IconData> _icons = [
     Icons.upload,
     Icons.analytics,
     Icons.transcribe,
     Icons.help,
   ];
-  List<Color> _color = [
-    hexToColor("#FFA07A"),
-    hexToColor("#FFA07A"),
-    hexToColor("#FFA07A"),
-    hexToColor("#FFA07A"),
-  ];
+  
 
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
-    TabController _tabController = TabController(length: 3, vsync: this);
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          leading: Container(
-            width: 200.0,
-            height: 200.0,
-            padding :EdgeInsets.only(left: 10),
-            child: ClipOval(
-      child: Image.asset(
-        'assets/logo/logo_1.png',
-        fit: BoxFit.cover,
-        width: 200.0, // Adjust the width of the circular image
-        height: 200.0, // Adjust the height of the circular image
-      ),
-    ),
+          leading: Padding(
+            padding :EdgeInsets.only(left: 8, top :2,bottom: 2),
+            child: Container(
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(100)),
+              child: Image.asset(
+                      'assets/logo/logo_1.png',
+                    ),
+            ),
           ),
           title: Center(
             child: Text(
               "Saarthi",
               style: TextStyle(
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w500,
+                fontSize: 26,
+                fontStyle: FontStyle.italic,
               ),
             ),
           ),
           backgroundColor: hexToColor("#FFA07A"),
-          actions: [IconButton(onPressed: () {}, icon: Icon(Icons.menu))],
+          actions: [IconButton(onPressed: () {}, icon: Icon(Icons.menu,size:40,))],
         ),
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
-                height: 25,
-              ),
               Container(
-                margin: const EdgeInsets.only(left: 20),
+                margin: const EdgeInsets.only(top: 10,left : 10),
                 child: AppLarge(text: 'Discover'),
-              ),
-              SizedBox(
-                height: 18,
               ),
               MyCarouselSlider(),
               SizedBox(
@@ -113,7 +99,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     itemBuilder: (BuildContext context, int index) {
                       return FeatureContainer(
                         icon: _icons[index],
-                        color: _color[index],
+                        color: darkOrange,
+                        text : features[index],
                         onPress: () {
                           Navigator.pushNamed(context, 'document');
                         },
@@ -134,12 +121,14 @@ class FeatureContainer extends StatelessWidget {
   final IconData icon;
   final Color color;
   final VoidCallback onPress;
+  final text;
 
   const FeatureContainer({
     Key? key,
     required this.icon,
     required this.color,
     required this.onPress,
+    required this.text,
   }) : super(key: key);
 
   @override
@@ -148,51 +137,34 @@ class FeatureContainer extends StatelessWidget {
       onTap: onPress,
       child: Container(
         margin: const EdgeInsets.only(
+        
           right: 5,
           left: 5,
         ),
+        padding: EdgeInsets.only(top:10),
         // width: 10,
         // height: 10,
         decoration: BoxDecoration(
-        
           borderRadius: BorderRadius.circular(50),
           color: color.withOpacity(0.5),
         ),
-        child: Icon(
-          icon,
-          color: color,
-          size: 50,
+        child: Column(
+          children: [
+            Icon(
+              icon,
+              color: color,
+              size: 50,
+            ),
+            Text('$text',style: TextStyle(fontWeight: FontWeight.w400,fontSize: 18,),),
+          ],
+
         ),
       ),
     );
   }
 }
 
-class CircleTabIndicator extends Decoration {
-  final Color color;
-  double radius;
-  CircleTabIndicator({required this.color, required this.radius});
-  @override
-  BoxPainter createBoxPainter([VoidCallback? onChanged]) {
-    return _CirclePainter(color: color, radius: radius);
-  }
-}
 
-class _CirclePainter extends BoxPainter {
-  final Color color;
-  double radius;
-  _CirclePainter({required this.color, required this.radius});
 
-  @override
-  void paint(Canvas canvas, Offset offset, ImageConfiguration configuration) {
-    Paint _paint = Paint();
-    _paint.color = color;
-    _paint.isAntiAlias = true;
-    final Offset circleOffset = Offset(
-      configuration.size!.width / 2 - radius / 2,
-      configuration.size!.height - radius,
-    );
 
-    canvas.drawCircle(offset + circleOffset, radius, _paint);
-  }
-}
+ 
